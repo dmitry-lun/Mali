@@ -19,7 +19,7 @@ internal/
          parser/        # PE file parsers (headers, sections, imports, exports)
          repository/    # Repository implementations
     presentation/       # Presentation layer
-         cli/           # CLI commands (Cobra)
+        cli/           # CLI commands (Cobra)
 pkg/                    # Reusable components
     binary/             # Binary data utilities (RVA)
     detector/           # Detectors (packers, risk level)
@@ -49,27 +49,57 @@ pkg/                    # Reusable components
    - Reusable utilities
    - Independent components
 
-## Installation
+## Quick Start
 
-### Local Build
+### Step 1: Build
 
 ```bash
-# Build the binary
 make build
+```
 
-# The binary will be available at bin/mali
+### Step 2: Install (optional)
+
+```bash
+make install
+```
+
+### Step 3: Use
+
+```bash
+# If installed
+mali analyze -f file.exe -o report.json
+
+# Or run directly
+./bin/mali analyze -f file.exe -o report.json
+```
+
+## Installation
+
+### Option 1: Local Build
+
+```bash
+make build
+./bin/mali analyze -f file.exe -o report.json
+```
+
+### Option 2: Install to PATH
+
+```bash
+# Step 1: Install
+make install
+
+# Step 2: Check if GOPATH/bin is in PATH
+echo $PATH | grep -q "$(go env GOPATH)/bin" || echo "Add to PATH: export PATH=\$PATH:$(go env GOPATH)/bin"
+
+# Step 3: Use from anywhere
+mali analyze -f file.exe -o report.json
 ```
 
 ## Usage
 
-### Local Run
-
 ```bash
 # Analyze PE file
-./bin/mali analyze -f <file.exe> -o report.json
-
-# Or if installed in PATH
-mali analyze -f <file.exe> -o report.json
+mali analyze -f file.exe -o report.json
 
 # Create test PE file
 ./scripts/create_test_pe.sh
@@ -77,23 +107,13 @@ mali analyze -f <file.exe> -o report.json
 
 ## Development
 
-### Commands
-
 ```bash
-# Build
-make build
-
-# Format code
-make fmt
-
-# Run vet
-make vet
-
-# Run all checks (fmt, vet)
-make check
-
-# Clean build artifacts
-make clean
+make build    # Build binary
+make fmt      # Format code
+make vet      # Run vet
+make check    # Run fmt + vet
+make install  # Install to GOPATH/bin
+make clean    # Clean artifacts
 ```
 
 ## Features
@@ -106,19 +126,9 @@ make clean
 - Risk level assessment (SAFE, LOW, MEDIUM, HIGH)
 - JSON report generation
 
-## CI/CD
-
-The project includes GitHub Actions workflows:
-
-- **CI** (`.github/workflows/ci.yml`): Runs tests and builds on multiple platforms
-- **Release** (`.github/workflows/release.yml`): Creates cross-platform releases on tag push
-
-### Docker (Alternative)
-
-Build and run with Docker:
+## Docker
 
 ```bash
 docker build -t mali .
 docker run --rm -v $(pwd):/data mali analyze -f /data/file.exe -o /data/report.json
 ```
-
