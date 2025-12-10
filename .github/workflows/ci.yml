@@ -70,6 +70,7 @@ jobs:
         path: mali
         if-no-files-found: error
 
+<<<<<<< Updated upstream
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -86,4 +87,6 @@ jobs:
       uses: golangci/golangci-lint-action@v4
       with:
         version: latest
+=======
+>>>>>>> Stashed changes
 

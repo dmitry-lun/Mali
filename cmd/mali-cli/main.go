@@ -1,5 +1,0 @@
-package malwcli
-
-func main() {
-
-}
