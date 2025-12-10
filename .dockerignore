@@ -1,0 +1,10 @@
+.git
+.github
+*.md
+samples/
+scripts/
+*.exe
+*.test
+out.json
+test_output.json
+
