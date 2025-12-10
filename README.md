@@ -49,11 +49,27 @@ pkg/                    # Reusable components
    - Reusable utilities
    - Independent components
 
+## Installation
+
+### Local Build
+
+```bash
+# Build the binary
+make build
+
+# The binary will be available at bin/mali
+```
+
 ## Usage
+
+### Local Run
 
 ```bash
 # Analyze PE file
-./mali analyze -f <file.exe> -o report.json
+./bin/mali analyze -f <file.exe> -o report.json
+
+# Or if installed in PATH
+mali analyze -f <file.exe> -o report.json
 
 # Create test PE file
 ./scripts/create_test_pe.sh
@@ -64,12 +80,6 @@ pkg/                    # Reusable components
 ### Commands
 
 ```bash
-# Run tests
-make test
-
-# Run tests with coverage
-make test-coverage
-
 # Build
 make build
 
@@ -79,7 +89,7 @@ make fmt
 # Run vet
 make vet
 
-# Run all checks (fmt, vet, test)
+# Run all checks (fmt, vet)
 make check
 
 # Clean build artifacts
@@ -103,7 +113,7 @@ The project includes GitHub Actions workflows:
 - **CI** (`.github/workflows/ci.yml`): Runs tests and builds on multiple platforms
 - **Release** (`.github/workflows/release.yml`): Creates cross-platform releases on tag push
 
-### Docker
+### Docker (Alternative)
 
 Build and run with Docker:
 
