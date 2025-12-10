@@ -1,0 +1,11 @@
+*.exe
+*.test
+*.out
+mali
+mali-*
+out.json
+test_output.json
+checksums.txt
+.vscode/
+.idea/
+
