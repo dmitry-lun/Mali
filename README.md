@@ -105,6 +105,32 @@ mali analyze -f file.exe -o report.json
 ./scripts/create_test_pe.sh
 ```
 
+## Test Samples
+
+Create test PE files with different risk levels:
+
+```bash
+# Generate all test samples (SAFE, LOW, MEDIUM, HIGH)
+go run scripts/create_test_pe_files.go
+```
+
+This will create:
+- `samples/test_safe.exe` - Safe file (expected: SAFE risk level)
+- `samples/test_low.exe` - Low risk file (expected: LOW risk level)
+- `samples/test_medium.exe` - Medium risk file (expected: MEDIUM risk level)
+- `samples/test_high.exe` - High risk file (expected: HIGH risk level)
+
+Test files characteristics:
+- **SAFE**: Standard sections (.text, .data), low entropy
+- **LOW**: Non-standard section (.code), medium entropy
+- **MEDIUM**: Multiple non-standard sections (.text1, .data2, .packed), high entropy
+- **HIGH**: Packer sections (UPX0, UPX1), non-standard sections, very high entropy
+
+You can then test the analyzer:
+```bash
+./bin/mali analyze -f samples/test_high.exe -o high_risk_report.json
+```
+
 ## Development
 
 ```bash
